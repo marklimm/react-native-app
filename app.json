@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/gorilla-looking-phone.png",
+      "image": "./assets/images/gorilla-looking-phone.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },

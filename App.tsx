@@ -1,54 +1,49 @@
 import { StatusBar } from 'expo-status-bar'
-import { useState } from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import Colors from './src/utilities/colors'
+import { ImageBackground, SafeAreaView, StyleSheet, View } from 'react-native'
+import { useFonts } from 'expo-font'
+import AppLoading from 'expo-app-loading'
+import { LinearGradient } from 'expo-linear-gradient'
+import FirstScreen from './src/screens/FirstScreen'
 
 const App = () => {
-  const [photoVisible, setPhotoVisible] = useState(true)
+  const [fontsLoaded] = useFonts({
+    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+  })
 
-  const buttonClicked = () => {
-    setPhotoVisible((visible) => !visible)
+  if (!fontsLoaded) {
+    return <AppLoading />
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={{ color: '#888', fontSize: 18 }}>
-        Open up App.tsx to start working on your app! Test 123
-      </Text>
-
-      <TouchableOpacity
-        style={{
-          backgroundColor: Colors.TEAL,
-          padding: 7,
-          borderRadius: 5,
-          marginVertical: 10,
-        }}
-        onPress={buttonClicked}
+    <LinearGradient colors={['#93A537', '#ffffff']} style={styles.container}>
+      <ImageBackground
+        source={require('./assets/images/background.png')}
+        resizeMode="cover"
+        style={styles.container}
+        imageStyle={styles.backgroundImage}
       >
-        <Text style={{ fontSize: 20, color: Colors.WHITE }}>Toggle photo</Text>
-      </TouchableOpacity>
-
-      {photoVisible && (
-        <Image
-          source={{
-            uri: 'https://cbsnews1.cbsistatic.com/hub/i/r/2017/07/06/77b697b7-5fd9-431c-9929-6d92785a6b5f/thumbnail/640x425/b355cfa0d518a9a03ef46f67a5b8d603/screen-shot-2017-07-06-at-11-20-24-am.png',
-          }}
-          style={{ width: 640, height: 425 }}
-        />
-      )}
-
-      <StatusBar style="auto" />
-    </View>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.mainContent}>
+            <FirstScreen></FirstScreen>
+          </View>
+        </SafeAreaView>
+        <StatusBar style="auto" />
+      </ImageBackground>
+    </LinearGradient>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  backgroundImage: {
+    opacity: 0.35,
+  },
+  mainContent: {
+    paddingVertical: 40,
     paddingHorizontal: 20,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 })
 
