@@ -28,7 +28,8 @@ const App = () => {
             <FirstScreen></FirstScreen>
           </View>
         </SafeAreaView>
-        <StatusBar style="auto" />
+
+        <StatusBar style="light" />
       </ImageBackground>
     </LinearGradient>
   )

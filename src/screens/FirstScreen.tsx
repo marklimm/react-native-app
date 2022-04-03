@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import {
   Image,
+  KeyboardAvoidingView,
+  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
+  useWindowDimensions,
   View,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
@@ -14,6 +17,8 @@ import Colors from '../utilities/colors'
 const FirstScreen = () => {
   const [photoVisible, setPhotoVisible] = useState(true)
   const [inputText, setInputText] = useState('')
+
+  const { height: deviceHeight } = useWindowDimensions()
 
   const buttonClicked = () => {
     setPhotoVisible((visible) => !visible)
@@ -24,7 +29,8 @@ const FirstScreen = () => {
   }
 
   return (
-    <>
+    // I'm not 100% sure if I'm placing this <KeyboardAvoidingView /> in the right place, but this seems to work for my android device
+    <KeyboardAvoidingView behavior="position">
       <ScrollView>
         <Text
           style={{
@@ -44,7 +50,8 @@ const FirstScreen = () => {
               borderRadius: 5,
 
               elevation: 10,
-              margin: 20,
+              marginHorizontal: deviceHeight < 400 ? 170 : 20,
+              marginVertical: 20,
             }
 
             //  if the Pressable is currently being pressed, decrease the opacity
@@ -62,7 +69,11 @@ const FirstScreen = () => {
             />
 
             <Text
-              style={{ fontSize: 20, color: Colors.WHITE, textAlign: 'center' }}
+              style={{
+                fontSize: 20,
+                color: Colors.WHITE,
+                textAlign: 'center',
+              }}
             >
               Toggle photo
             </Text>
@@ -108,7 +119,7 @@ const FirstScreen = () => {
 
         <Text>stuff below photo</Text>
       </ScrollView>
-    </>
+    </KeyboardAvoidingView>
   )
 }
 
