@@ -3,7 +3,8 @@ import { ImageBackground, SafeAreaView, StyleSheet, View } from 'react-native'
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
 import { LinearGradient } from 'expo-linear-gradient'
-import FirstScreen from './src/screens/FirstScreen'
+// import FirstScreen from './src/screens/FirstScreen'
+import CategoriesScreen from './src/screens/CategoriesScreen'
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -25,11 +26,12 @@ const App = () => {
       >
         <SafeAreaView style={styles.container}>
           <View style={styles.mainContent}>
-            <FirstScreen></FirstScreen>
+            <CategoriesScreen />
+            {/* <FirstScreen></FirstScreen> */}
           </View>
         </SafeAreaView>
 
-        <StatusBar style="light" />
+        <StatusBar style="auto" />
       </ImageBackground>
     </LinearGradient>
   )

@@ -12,7 +12,7 @@ import {
   View,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import Colors from '../utilities/colors'
+import Color from '../utilities/Color'
 
 const FirstScreen = () => {
   const [photoVisible, setPhotoVisible] = useState(true)
@@ -45,7 +45,7 @@ const FirstScreen = () => {
         <Pressable
           style={({ pressed }) => {
             const regularStyles = {
-              backgroundColor: Colors.TEAL,
+              backgroundColor: Color.TEAL,
               padding: 7,
               borderRadius: 5,
 
@@ -64,14 +64,14 @@ const FirstScreen = () => {
             <Ionicons
               name="camera"
               size={24}
-              color={Colors.WHITE}
+              color={Color.WHITE}
               style={{ marginRight: 5 }}
             />
 
             <Text
               style={{
                 fontSize: 20,
-                color: Colors.WHITE,
+                color: Color.WHITE,
                 textAlign: 'center',
               }}
             >
