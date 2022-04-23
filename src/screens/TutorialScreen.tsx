@@ -14,7 +14,7 @@ import {
 import { Ionicons } from '@expo/vector-icons'
 import Color from '../utilities/Color'
 
-const FirstScreen = () => {
+const TutorialScreen = () => {
   const [photoVisible, setPhotoVisible] = useState(true)
   const [inputText, setInputText] = useState('')
 
@@ -37,9 +37,10 @@ const FirstScreen = () => {
             color: '#ffffff',
             fontSize: 18,
             fontFamily: 'open-sans-bold',
+            textAlign: 'center',
           }}
         >
-          Open up App.tsx to start working on your app! Test 36747
+          This screen was my first experimenting with react native
         </Text>
 
         <Pressable
@@ -137,4 +138,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default FirstScreen
+export default TutorialScreen
