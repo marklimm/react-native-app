@@ -1,10 +1,27 @@
 import { StatusBar } from 'expo-status-bar'
-import { ImageBackground, SafeAreaView, StyleSheet, View } from 'react-native'
+import { ImageBackground, StyleSheet } from 'react-native'
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
 import { LinearGradient } from 'expo-linear-gradient'
-// import FirstScreen from './src/screens/FirstScreen'
+
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+
 import CategoriesScreen from './src/screens/CategoriesScreen'
+import TutorialScreen from './src/screens/TutorialScreen'
+import CategoryScreen from './src/screens/CategoryScreen'
+
+import PlayerScreen from './src/screens/PlayerScreen'
+
+const RootStack = createNativeStackNavigator()
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: 'transparent',
+  },
+}
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -17,23 +34,39 @@ const App = () => {
   }
 
   return (
-    <LinearGradient colors={['#93A537', '#ffffff']} style={styles.container}>
-      <ImageBackground
-        source={require('./assets/images/background.png')}
-        resizeMode="cover"
-        style={styles.container}
-        imageStyle={styles.backgroundImage}
-      >
-        <SafeAreaView style={styles.container}>
-          <View style={styles.mainContent}>
-            <CategoriesScreen />
-            {/* <FirstScreen></FirstScreen> */}
-          </View>
-        </SafeAreaView>
+    <>
+      <StatusBar style="auto" />
+      <NavigationContainer theme={MyTheme}>
+        <LinearGradient
+          colors={['#93A537', '#ffffff']}
+          style={styles.container}
+        >
+          <ImageBackground
+            source={require('./assets/images/background.png')}
+            resizeMode="cover"
+            style={styles.container}
+            imageStyle={styles.backgroundImage}
+          >
+            <RootStack.Navigator initialRouteName="Categories">
+              <RootStack.Screen
+                name="Categories"
+                component={CategoriesScreen}
+                options={{ title: 'NBA categories' }}
+              />
+              <RootStack.Screen name="Category" component={CategoryScreen} />
 
-        <StatusBar style="auto" />
-      </ImageBackground>
-    </LinearGradient>
+              <RootStack.Screen name="Player" component={PlayerScreen} />
+
+              <RootStack.Screen
+                name="TutorialScreen"
+                component={TutorialScreen}
+                options={{ title: 'Tutorial' }}
+              />
+            </RootStack.Navigator>
+          </ImageBackground>
+        </LinearGradient>
+      </NavigationContainer>
+    </>
   )
 }
 
@@ -43,10 +76,6 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     opacity: 0.35,
-  },
-  mainContent: {
-    paddingVertical: 40,
-    paddingHorizontal: 20,
   },
 })
 
